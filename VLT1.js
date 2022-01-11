@@ -3,8 +3,11 @@ let definitions = ['a','b','c','d','e'];
 let usedWords = '';
 let output = '';
 
-//Currently this function just cycles through each letter combination and
-//displays it in order. It should cycle through randomly.
+//Currently this function rolls for a number from 0 to (words.length - 1) and then stores each
+//number in an array. Function then rolls again and checks if rolled number is already in array
+//in which case it prints 'roll again', otherwise it prints the number.
+//Printing was done just to check if function worked, function should just store numbers in an array
+//so it can then be used as index-order for the words list.
 
 function wordRandomizer() {
     
@@ -24,6 +27,9 @@ function wordRandomizer() {
     }
 };
 
+//This function cycles words. It should be used together with wordRandomizer() to give words to
+//the User in random order.
+
 function wordCycler() {    
     
     for(i=0; i<words.length; i++) {
@@ -31,23 +37,6 @@ function wordCycler() {
         }    
 };
 
-
-//wordRandomizer();
-//wordCycler();
-
-function test() {
-    let usedNumbers = [];
-
-    for(i=0; i<words.length; i++) {
-        let newNumber = Math.floor(Math.random()*words.length);
-    if (newNumber === usedNumbers.find(element => element === newNumber)) {
-        document.write('roll again <br>');
-    } else {
-        usedNumbers.push(newNumber);
-        document.write(newNumber+'<br>');
-    }
-}
-}
 
 wordRandomizer();
 
