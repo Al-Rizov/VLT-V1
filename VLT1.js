@@ -42,14 +42,11 @@ function wordOrderRandomizer() {
 
 function wordCycler() {
         
-    
-    
-
     if(readyList.length != 0) {
-    document.getElementById("paragraph").innerHTML = readyList[0];
-    document.getElementById("button").innerHTML = "Next word.";
-    wordHistory.push(readyList[0]);
-    readyList.shift();
+        document.getElementById("paragraph").innerHTML = readyList[0];
+        document.getElementById("button").innerHTML = "Next word.";
+        wordHistory.push(readyList[0]);
+        readyList.shift();
     
     } else if (wordHistory.length === words.length){
         document.getElementById("paragraph").innerHTML = "Game over.";
@@ -64,6 +61,21 @@ function wordCycler() {
     
 };
 
+//This function should display previously shown words to the User.
+
+function historyCycler() {
+    
+    if(readyList.length < words.length){
+        readyList.unshift(wordHistory.pop());
+    }
+    if (wordHistory.length != 0) {
+        document.getElementById("paragraph").innerHTML = wordHistory[(wordHistory.length-1)];
+    } else {
+        document.getElementById("paragraph").innerHTML = "No more previous words left."
+    }
+}
+
 wordOrderRandomizer();
 document.getElementById("button").addEventListener("click", wordCycler);
+document.getElementById("rewindButton").addEventListener("click", historyCycler);
 
