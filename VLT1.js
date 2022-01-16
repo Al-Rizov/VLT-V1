@@ -9,10 +9,13 @@ let definitions = ['a',
 let outputOrder = [];
 let readyList = [];
 let wordHistory = [];
+let newWord = document.getElementById("wordEntry");
+let test = '';
 
 
-//Currently this function rolls for a number from 0 to (words.length - 1) and then stores each
-//number in an array. This array is used for setting the order in which wordCycler() shows words.
+//This function rolls for a number from 0 to (words.length - 1) and then stores each
+//number in the outputOrder array. This array is used for setting the order in which wordCycler() 
+//will show words from the list.
 
 function wordOrderRandomizer() {
     
@@ -37,8 +40,7 @@ function wordOrderRandomizer() {
     
 };
 
-//This function cycles words. It should be used together with wordRandomizer() to give words to
-//the User in a random order.
+//This function cycles through the words-array in a random order. 
 
 function wordCycler() {
         
@@ -61,11 +63,11 @@ function wordCycler() {
     
 };
 
-//This function should display previously shown words to the User.
+//This function cycles through the words the User has already seen.
 
 function historyCycler() {
     
-    if(readyList.length < words.length){
+    if(readyList.length < words.length && wordHistory.length != 0){
         readyList.unshift(wordHistory.pop());
     }
     if (wordHistory.length != 0) {
@@ -73,9 +75,22 @@ function historyCycler() {
     } else {
         document.getElementById("paragraph").innerHTML = "No more previous words left."
     }
+};
+
+/*function needs to:
+    1.Insert a word AND its definition in their respected variables
+    2.Check if both values are given by User and warn him, if there's one missing
+    3.Check if a word is already present and if so, inform User
+    4.Remove value from the text and textarea elements
+*/
+function newWordInsertion() {
+    let something = document.getElementById("testWord").value;
+    test += something;
 }
 
+
 wordOrderRandomizer();
+document.getElementById("submit").addEventListener("click", newWordInsertion);
 document.getElementById("button").addEventListener("click", wordCycler);
 document.getElementById("rewindButton").addEventListener("click", historyCycler);
 
