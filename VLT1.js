@@ -9,7 +9,6 @@ let definitions = ['a',
 let outputOrder = [];
 let readyList = [];
 let wordHistory = [];
-let newWord = document.getElementById("wordEntry");
 let test = '';
 
 
@@ -78,14 +77,27 @@ function historyCycler() {
 };
 
 /*function needs to:
-    1.Insert a word AND its definition in their respected variables
-    2.Check if both values are given by User and warn him, if there's one missing
-    3.Check if a word is already present and if so, inform User
-    4.Remove value from the text and textarea elements
+    -Save insertions into their arrays, so that they stay there.
 */
 function newWordInsertion() {
-    let something = document.getElementById("testWord").value;
-    test += something;
+    const newWord = document.getElementById("newWord").value;
+    const newWordDefinition = document.getElementById("wordDefinition").value;
+    const wordDouble = words.find(element => element === newWord);
+    
+    if(newWord === "") {
+        alert("Sorry, but it looks like the 'New Word'-field is empty. Please enter a word to be saved.")
+        
+    } else if (newWord === wordDouble) {
+        alert("It would seem that this word is already in your list. Please enter a different word and try again.")
+    } else if (newWordDefinition === "") {
+        alert("Please add a definition to go with that awesome new word you've found.");
+    } else {
+        words.push(newWord);
+        definitions.push(newWordDefinition);
+        document.getElementById("newWord").value = "";
+        document.getElementById("wordDefinition").value = "";
+    }
+    
 }
 
 
