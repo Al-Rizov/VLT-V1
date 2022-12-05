@@ -9,54 +9,54 @@ let definitions = ['a',
 let outputOrder = [];
 let readyList = [];
 let wordHistory = [];
-let test = '';
+let counter = 0;
+
+const button = document.getElementById("button");
+const rewindButton = document.getElementById("rewindButton");
+const wordSpace =document.getElementById("paragraph");
 
 
-//This function rolls for a number from 0 to (words.length - 1) and then stores each
-//number in the outputOrder array. This array is used for setting the order in which wordCycler() 
-//will show words from the list.
 
 function wordOrderRandomizer() {
     
-    let numbersInList = [];
+    outputOrder = [];
     
     for(i=0; i<words.length; i++) {
         
         let newNumber = Math.floor(Math.random()*words.length);
-        if (newNumber != numbersInList.find(element => element === newNumber)) {
-            numbersInList.push(newNumber);
+        
+        if (newNumber != outputOrder.find(element => element === newNumber)) {
+            outputOrder.push(newNumber);
+            readyList.push(words[newNumber]);
             
-            } else {
-            i--;
-            }
+            } else { i--; }
     }
-
-    outputOrder = numbersInList;
-
-    for(i=0; i<words.length; i++) {
-        readyList.push(words[outputOrder[i]]);
-        } 
     
 };
-
-//This function cycles through the words-array in a random order. 
+ 
 
 function wordCycler() {
         
     if(readyList.length != 0) {
-        document.getElementById("paragraph").innerHTML = readyList[0];
-        document.getElementById("button").innerHTML = "Next word.";
+        wordSpace.innerHTML = readyList[0];
+        button.innerHTML = "Next word.";
         wordHistory.push(readyList[0]);
         readyList.shift();
+        console.log('READY: ' + readyList);
+        console.log('HISTORY: ' + wordHistory);
+        console.log();
+        
     
-    } else if (wordHistory.length === words.length){
-        document.getElementById("paragraph").innerHTML = "Game over.";
-        document.getElementById("button").innerHTML = "Start again?";
-        wordHistory = [];
+    } else if (wordHistory.length === outputOrder.length){
+        wordSpace.innerHTML = "Game over.";
+        button.innerHTML = "Start again?";
+        outputOrder = [];
+        
         
     } else {
-        document.getElementById("button").innerHTML = "Click on Me!";
-        document.getElementById("paragraph").innerHTML = "Paragraph.";
+        button.innerHTML = "Click on Me!";
+        wordSpace.innerHTML = "Paragraph.";
+        wordHistory = [];
         wordOrderRandomizer();
     }
     
@@ -66,19 +66,30 @@ function wordCycler() {
 
 function historyCycler() {
     
-    if(readyList.length < words.length && wordHistory.length != 0){
+     
+    if (wordHistory.length > 1) {
         readyList.unshift(wordHistory.pop());
+        wordSpace.innerHTML = wordHistory[(wordHistory.length-1)];
+        
+
+        console.log('READY: ' + readyList);
+        console.log('HISTORY: ' + wordHistory);
+        console.log();
+    } else if(wordHistory.length === 1) {
+        readyList.unshift(wordHistory.pop());
+        wordSpace.innerHTML = "No more previous words left.";
+        console.log('READY: ' + readyList);
+        console.log('HISTORY: ' + wordHistory);
+        console.log();
     }
-    if (wordHistory.length != 0) {
-        document.getElementById("paragraph").innerHTML = wordHistory[(wordHistory.length-1)];
-    } else {
-        document.getElementById("paragraph").innerHTML = "No more previous words left."
+    else {
+        wordSpace.innerHTML = "No more previous words left.";
     }
 };
 
-/*function needs to:
-    -Save insertions into their arrays, so that they stay there.
-*/
+
+//-Save insertions into their arrays, so that they stay there.
+
 function newWordInsertion() {
     const newWord = document.getElementById("newWord").value;
     const newWordDefinition = document.getElementById("wordDefinition").value;
@@ -102,7 +113,7 @@ function newWordInsertion() {
 
 
 wordOrderRandomizer();
-document.getElementById("submit").addEventListener("click", newWordInsertion);
-document.getElementById("button").addEventListener("click", wordCycler);
-document.getElementById("rewindButton").addEventListener("click", historyCycler);
+//document.getElementById("submit").addEventListener("click", newWordInsertion);
+button.addEventListener("click", wordCycler);
+rewindButton.addEventListener("click", historyCycler);
 
