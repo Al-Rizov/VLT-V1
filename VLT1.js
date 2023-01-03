@@ -6,20 +6,20 @@ let definitions = ['a',
                 'b',
                 'c',
                 'd'];
-let outputOrder = [];
 let readyList = [];
-let wordHistory = [];
-let counter = 0;
+let definitionsList = [];
+let counter = -1;
 
-const button = document.getElementById("button");
-const rewindButton = document.getElementById("rewindButton");
+
+const nextButton = document.getElementById("nextButton");
+const previousButton = document.getElementById("previousButton");
 const wordSpace =document.getElementById("paragraph");
 
 
 
 function wordOrderRandomizer() {
     
-    outputOrder = [];
+    let outputOrder = [];
     
     for(i=0; i<words.length; i++) {
         
@@ -28,92 +28,65 @@ function wordOrderRandomizer() {
         if (newNumber != outputOrder.find(element => element === newNumber)) {
             outputOrder.push(newNumber);
             readyList.push(words[newNumber]);
+            definitionsList.push(definitions[newNumber]);
             
             } else { i--; }
     }
     
-};
- 
-
-function wordCycler() {
-        
-    if(readyList.length != 0) {
-        wordSpace.innerHTML = readyList[0];
-        button.innerHTML = "Next word.";
-        wordHistory.push(readyList[0]);
-        readyList.shift();
-        console.log('READY: ' + readyList);
-        console.log('HISTORY: ' + wordHistory);
-        console.log();
-        
-    
-    } else if (wordHistory.length === outputOrder.length){
-        wordSpace.innerHTML = "Game over.";
-        button.innerHTML = "Start again?";
-        outputOrder = [];
-        
-        
-    } else {
-        button.innerHTML = "Click on Me!";
-        wordSpace.innerHTML = "Paragraph.";
-        wordHistory = [];
-        wordOrderRandomizer();
-    }
-    
+    console.log(readyList + ' and ' + definitionsList);
 };
 
-//This function cycles through the words the User has already seen.
-
-function historyCycler() {
-    
-     
-    if (wordHistory.length > 1) {
-        readyList.unshift(wordHistory.pop());
-        wordSpace.innerHTML = wordHistory[(wordHistory.length-1)];
-        
-
-        console.log('READY: ' + readyList);
-        console.log('HISTORY: ' + wordHistory);
-        console.log();
-    } else if(wordHistory.length === 1) {
-        readyList.unshift(wordHistory.pop());
-        wordSpace.innerHTML = "No more previous words left.";
-        console.log('READY: ' + readyList);
-        console.log('HISTORY: ' + wordHistory);
-        console.log();
-    }
-    else {
-        wordSpace.innerHTML = "No more previous words left.";
-    }
-};
-
-
-//-Save insertions into their arrays, so that they stay there.
-
-function newWordInsertion() {
-    const newWord = document.getElementById("newWord").value;
-    const newWordDefinition = document.getElementById("wordDefinition").value;
-    const wordDouble = words.find(element => element === newWord);
-    
-    if(newWord === "") {
-        alert("Sorry, but it looks like the 'New Word'-field is empty. Please enter a word to be saved.")
-        
-    } else if (newWord === wordDouble) {
-        alert("It would seem that this word is already in your list. Please enter a different word and try again.")
-    } else if (newWordDefinition === "") {
-        alert("Please add a definition to go with that awesome new word you've found.");
-    } else {
-        words.push(newWord);
-        definitions.push(newWordDefinition);
-        document.getElementById("newWord").value = "";
-        document.getElementById("wordDefinition").value = "";
-    }
-    
+function displayWord() {
+    if(counter === -1) {
+        wordSpace.innerHTML = 'No more words in history pile.';
+    } 
+        else if(counter === words.length) {
+            wordSpace.innerHTML = 'Game Over';
+        }
+        else{
+            wordSpace.innerHTML = `'${readyList[counter]}' means: ${definitionsList[counter]}.`;
+        }
 }
 
+function nextWord() {
+
+    if(counter != words.length) {
+        counter++;
+    }
+    
+    displayWord();
+};
+
+function previousWord() {
+    
+    if(counter != -1) {
+        counter--;
+    }
+
+    displayWord();
+}
+ 
+
+
+/*
+Create a:
+
+- semi-permanent list with indexedDB.
+
+- input field for adding new words+definitions in list.
+
+- delete-from-list function.
+
+- show-definition function.
+
+- check if word/spelling is correct function.
+
+- list of learned words.
+
+*/
 
 wordOrderRandomizer();
 //document.getElementById("submit").addEventListener("click", newWordInsertion);
-button.addEventListener("click", wordCycler);
-rewindButton.addEventListener("click", historyCycler);
+nextButton.addEventListener("click", nextWord);
+previousButton.addEventListener("click", previousWord);
 
