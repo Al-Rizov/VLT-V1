@@ -8,7 +8,7 @@
     <title>VLT-1</title>
     <meta name="Vocabulary Learning Tool" content="A handy program to 
     help learn rare and exciting words in the english language.">
-    <meta name="Mr. Oolong" content="A program for learning new words.">
+    <meta name="Mr.Oolong" content="A program for learning new words.">
     <link rel="icon" href="/favicon.ico">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -16,33 +16,78 @@
 </head>
 
 <body>
-
+    <div class="title">
     <h1>Vocabulary Learning Tool V-1</h1>
 
-    <div>
-        <p id="paragraph">This is a paragraph.</p>
+    <h3>Welcome to one of the most useful tools for enriching your vocabulary! 
+        <br> What would you like to do?
+    </h3>
     </div>
 
-    <div id="interface">
-        <button id="nextButton">Click on Me!</button>
-        <button id="previousButton">Previous word.</button>
-        <button id="insertWord" class="inactive">New word?</button>
-        <button id="removeWord" class="inactive">Erase word?</button>
-    </div>
-    <div>
-        <form action = "" id="wordEntry" class="inactive">
-            <p>
-                <label>New Word:
-                <input type = "text" name = "newWord" id = "newWord"/></label>
-                <br><br>
-                <label>Word Definition:
-                    <br>
-                <textarea name = "wordDefinition" id = "wordDefinition" cols = "23" rows = "4"></textarea></label>
-            </p>
-            <button type="button" id="submit" >Submit</button>
-        </form>
-    </div>
+<div class="wrapper">
+    
+    <section class="menu">
+        <button id="beginButton">Study words.</button>
+        <button id="testSpellingButton">Check my spelling.</button>
+        <button id="wordInsertButton">Insert new words.</button>
+        <button id="showListButton">Show me my words list.</button>
+    </section>
 
+    
+    
+    <section class="playground">
+
+        <div class="interface inactive">
+            <div id="wordSpace" class="wordSpace inactive"></div>
+            <div class="cardholder">
+                <div id="defSpace" class="defSpace">You will be shown a word from your list 
+                    in the space above. The definition will be shown here, but covered, so that
+                    you can try and remember the definition yourself. You can remove the cover by
+                    clicking on it.
+                </div>
+                <div id="cover" class="cover inactive"></div>
+            </div>
+            
+            <div>
+            <button id="previousButton">Previous</button>
+            <button id="restartButton" class="inactive">Restart</button>
+            <button id="nextButton" >Next</button>
+            </div>
+        </div>
+
+        <div class="interface inactive">
+            <input type="text" id="spellcheck" class="spellcheck inactive" placeholder="Type in the word described below.">
+            <div class="cardholder">
+            <section id="secondDefSpace" class="defSpace"> Press the 'Start' button to begin.</section>
+            </div>
+            <button id="reviewButton">Start</button>
+            
+        </div>
+        
+        <div class="wordInsert" >
+            <form name="VocabularyDatabase">
+                
+                <label for="word"><h3>New Word:</h3></label>
+                <input type = "text" name = "newWord" id = "newWord" class="insertionBackground"/>
+                
+                <label for="definition"><h3>Word Definition:</h3></label>
+                <textarea name = "wordDefinition" id = "wordDefinition" 
+                    cols = "23" rows = "9" class="insertionBackground"></textarea>
+                
+                <input type="submit" value="Submit word">
+                
+            </form>
+        </div>
+
+        <div id="listBox" class="listbox inactive">
+            <ul id="wordsList"></ul>
+            <button id="removeWordButton">Remove Selected Words</button>
+        </div>
+
+    </section>
+</div>
+
+    <script src="IDB.js"></script>
     <script src="VLT1.js"></script>
 </body>
 </html>

@@ -1,24 +1,193 @@
 body{
+    margin: 0;
     box-sizing: border-box;
+    min-width: 400px;
+    height: 100vh;
     display:flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(247, 235, 235);
+    background-image:  repeating-radial-gradient( circle at 0 0, transparent 0,
+                     #f7ebe6c1 10px ), 
+                     repeating-linear-gradient( #e2e2e6ed, #e0e0ec );
+    
+}
+
+.title{
+    text-align: center;
+    background-color: antiquewhite;
+    color: grey;
+    margin-bottom: 50px;
+    width: 100%;
+    border-bottom: solid 1px black;
 }
 
 button{
     margin: 0px 20px 0px 20px;
 }
 
-#interface{
-    width: 50%;
+.interface{
+    width: 70%;
+    min-width: 300px;
+    max-width: 450px;
+    height: 80%;
     display: flex;
-    justify-content: center;
-    padding: 30px 0px 50px 0px;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 20px;
+    background-color: gray;
+    box-shadow: 10px 5px 5px rgb(79, 75, 75);
+    border-radius: 5px;
     
 }
 
+.wordSpace, .spellcheck{
+    width: 80%;
+    min-width: 280px;
+    height: 10%;
+    background-color: antiquewhite;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;;
+}
+
+.cardholder{
+    width: 80%;
+    min-width: 280px;
+    min-height: 100px;
+    height: 60%;
+}
+
+.defSpace{
+    width: 100%;
+    min-width: 280px;
+    height: 100%;
+    background-color: antiquewhite;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+}
+
+.cover{
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    top: -100%;
+    z-index: 10;
+    background-color: #f7ebe6;
+    background: linear-gradient(135deg, #a5a5b155 25%, transparent 25%) -10px 0/ 20px 20px, 
+                linear-gradient(225deg, #a5a5b1 25%, transparent 25%) -10px 0/ 20px 20px,  
+                linear-gradient(315deg, #a5a5b155 25%, transparent 25%) 0px 0/ 20px 20px,
+                linear-gradient(45deg, #a5a5b1 25%, #f7ebe6 25%) 0px 0/ 20px 20px;
+        
+}
+
+.interface button{
+    min-width: 90px;
+}
+
+div form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 80%;
+}
+
+.insertionBackground{
+    background-color: antiquewhite;
+}
+
+.wordInsert{
+    display: flex;
+    justify-content: center;
+    padding: 30px 0px 30px 0px;
+    height: 80%;
+    min-width: 280px;
+    box-shadow: 10px 5px 5px rgb(79, 75, 75);
+    background-color: gray;
+    border-radius: 5px;
+
+}
+
+.listbox{
+    background-color: gray;
+    box-shadow: 10px 5px 5px rgb(79, 75, 75);
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    max-width: 250px;
+    padding-bottom: 10px;
+}
 
 
 .inactive{
     display: none;
 }
+
+
+
+.menu button{
+    margin-bottom: 10px;
+    min-width: 165px;
+}
+
+
+#wordsList{
+    background-color: antiquewhite;
+    max-height: 80%;
+    opacity: 80%;
+    border-radius: 5px;
+    padding: 10px 0px 10px 40px;
+    overflow-y: scroll;
+    min-height: 280px;
+    min-width: 150px;
+}
+
+.marked{
+    background-color: yellow;
+    color: rgba(208, 21, 21, 0.958);
+    border: solid 1px white;
+}
+
+.wrapper{
+    display: flex;
+    width: 90%;
+    height: 50vh;
+    min-width: 360px;
+
+}
+
+.menu{
+    max-width:300px;
+    display: flex;
+    height: fit-content;
+    align-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: antiquewhite;
+    box-shadow: 10px 5px 5px rgb(79, 75, 75);
+}
+
+.playground{
+    display: flex;
+    width: 65%;
+    max-width: 65%;
+    align-items: start;
+    justify-content: center;
+}
+
